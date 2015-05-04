@@ -2,6 +2,7 @@ package agent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.slf4j.Logger;
@@ -64,10 +65,10 @@ public class SimaAgentImpl implements SimaAgent {
 		//Set module inputs
 		//Set drives
 		Datapackage driveData = DatapackageImpl.newDatapackage();
-		for (Entry<String, Double> drive : drives.entrySet()) {
-			driveData.setContent(drive.getKey(), String.valueOf(drive.getValue()));
-		}
-		this.driveTrackModule.setInputData(driveData);
+		//for (Entry<String, Double> drive : drives.entrySet()) {
+		//	driveData.setContent(drive.getKey(), String.valueOf(drive.getValue()));
+		//}
+		//this.driveTrackModule.setInputData(driveData);
 		
 		
 		
@@ -77,7 +78,7 @@ public class SimaAgentImpl implements SimaAgent {
 		runModules();
 		
 		//Get results
-		this.action = this.actionModule.getOutputData().getContent("ACTION");
+		this.action = this.actionModule.getOutputData().get("ACTION");
 		
 	}
 
@@ -119,5 +120,22 @@ public class SimaAgentImpl implements SimaAgent {
 	public void killMind() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void setDriveModuleInput(Map<String, String> map) {
+		this.driveTrackModule.setInputData(DatapackageImpl.newDatapackage(map));
+		
+	}
+
+	@Override
+	public void setPerceptionInput(Map<String, String> map) {
+		this.perceptionTrackModule.setInputData(DatapackageImpl.newDatapackage(map));
+		
+	}
+
+	@Override
+	public String getActionModuleOutput(String key) {
+		return this.actionModule.getOutputData().getViewOfAllData().get(key);
 	}
 }

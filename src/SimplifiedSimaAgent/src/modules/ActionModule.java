@@ -6,7 +6,12 @@ public class ActionModule extends ModuleImpl {
 	
 	@Override
 	protected void executeModuleFunction() {
-		// TODO Auto-generated method stub
+		log.debug("Start action track");
+		int inValue = Integer.valueOf(this.getInputData().get("testvalue"));
+		int outValue = inValue+1;
+		this.getOutputData().setContent("testvalue", String.valueOf(outValue));
+		
+		log.debug("Received invalue={}. Set outvalue={}", inValue, outValue);
 		
 	}
 

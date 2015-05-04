@@ -10,6 +10,8 @@ public class Concept {
 	private final String emptyString = "";
 	private final HashMap<String, ArrayList<String>> values = new HashMap<String, ArrayList<String>>();
 	private final ArrayList<Link> links = new ArrayList<Link>();
+	private final ArrayList<Concept> subConcepts = new ArrayList<Concept>();
+	private Concept superConcept = null;
 	
 	public Concept() {
 		

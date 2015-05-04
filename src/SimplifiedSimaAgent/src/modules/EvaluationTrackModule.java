@@ -6,7 +6,12 @@ public class EvaluationTrackModule extends ModuleImpl {
 
 	@Override
 	protected void executeModuleFunction() {
-		// TODO Auto-generated method stub
+		log.debug("Start evaluation track");
+		int inValue = Integer.valueOf(this.getInputData().getViewOfAllData().get("testvalue"));
+		int outValue = inValue+1;
+		this.getOutputData().setContent("testvalue3", String.valueOf(outValue));
+		
+		log.debug("Received invalue={}. Set outvalue={}", inValue, outValue);
 		
 	}
 

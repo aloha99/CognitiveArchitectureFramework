@@ -6,7 +6,12 @@ public class PerceptionTrackModule extends ModuleImpl {
 
 	@Override
 	protected void executeModuleFunction() {
-		// TODO Auto-generated method stub
+		log.debug("Start perception track");
+		int inValue = Integer.valueOf(this.getInputData().getViewOfAllData().get("testvalue"));
+		int outValue = inValue+1;
+		this.getOutputData().setContent("testvalue2", String.valueOf(outValue));
+		
+		log.debug("Received invalue={}. Set outvalue={}", inValue, outValue);
 		
 	}
 

@@ -29,8 +29,8 @@ public abstract class ModuleImpl implements Module, ModuleListener {
 	}
 	
 	public void init(String id) {
-		log.debug("Init");
 		this.moduleId = id;
+		log.debug("Init module={}", this.moduleId);
 	}
 	
 	public String getModuleId() {

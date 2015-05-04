@@ -17,7 +17,7 @@ public class DatapackageImpl implements Datapackage {
 	}
 	
 	@Override
-	public String getContent(String address) {
+	public String get(String address) {
 		return this.data.get(address);
 	}
 	
@@ -33,6 +33,12 @@ public class DatapackageImpl implements Datapackage {
 	
 	public static Datapackage newDatapackage() {
 		return new DatapackageImpl();
+	}
+	
+	public static Datapackage newDatapackage(Map<String, String> data) {
+		Datapackage dp = new DatapackageImpl();
+		dp.setContent(data);
+		return dp;
 	}
 
 	@Override

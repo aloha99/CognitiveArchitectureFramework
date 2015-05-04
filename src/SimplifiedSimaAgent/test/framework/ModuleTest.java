@@ -38,7 +38,7 @@ public class ModuleTest {
 			//Get output
 			Datapackage output = testModule.getOutputData();
 			
-			assertEquals("MOVE_FORWARD", output.getContent("Action"));
+			assertEquals("MOVE_FORWARD", output.get("Action"));
 		} catch (Exception e) {
 			log.error("Error", e);
 			fail("Fail");

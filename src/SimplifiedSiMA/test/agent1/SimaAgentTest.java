@@ -1,4 +1,4 @@
-package agent;
+package agent1;
 
 import static org.junit.Assert.*;
 
@@ -10,8 +10,9 @@ import logger.MyLogger;
 import org.junit.Test;
 import org.slf4j.Logger;
 
+import agent1.TestAgentImpl;
 import datastructures.Concept;
-import framework.SimaAgent;
+import framework.AgentMain;
 
 public class SimaAgentTest {
 	
@@ -20,7 +21,7 @@ public class SimaAgentTest {
 	@Test
 	public void testDummySimaAgent() {
 		try {
-			SimaAgent simaAgent = new SimaAgentImpl();
+			AgentMain simaAgent = new TestAgentImpl();
 			
 			//Set input data and look what output data is created
 			final String address = "testvalue";

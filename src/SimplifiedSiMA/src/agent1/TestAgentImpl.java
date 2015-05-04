@@ -1,25 +1,22 @@
-package agent;
+package agent1;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.slf4j.Logger;
 
+import agent1.modules.ActionModule;
+import agent1.modules.DecisionTrackModule;
+import agent1.modules.DriveTrackModule;
+import agent1.modules.EvaluationTrackModule;
+import agent1.modules.PerceptionTrackModule;
 import datastructures.Concept;
+import framework.AgentMain;
 import framework.Datapackage;
 import framework.DatapackageImpl;
 import framework.Module;
-import framework.SimaAgent;
 import logger.MyLogger;
-import modules.ActionModule;
-import modules.DecisionTrackModule;
-import modules.DriveTrackModule;
-import modules.EvaluationTrackModule;
-import modules.PerceptionTrackModule;
 
-public class SimaAgentImpl implements SimaAgent {
+public class TestAgentImpl implements AgentMain {
 	protected static final Logger log = MyLogger.getLog("Sima");
 		
 	//Inputs

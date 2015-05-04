@@ -1,4 +1,4 @@
-package modules;
+package agent1.modules;
 
 import framework.ModuleImpl;
 

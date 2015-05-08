@@ -10,9 +10,9 @@ import agent1.modules.DriveTrackModule;
 import agent1.modules.EvaluationTrackModule;
 import agent1.modules.PerceptionTrackModule;
 import datastructures.Concept;
+import datastructures.Datapackage;
+import datastructures.DatapackageImpl;
 import framework.AgentMain;
-import framework.Datapackage;
-import framework.DatapackageImpl;
 import framework.Module;
 import logger.MyLogger;
 
@@ -73,15 +73,21 @@ public class TestAgentImpl implements AgentMain {
 
 	private void runModules() {
 		log.debug("Run drive track");
-		this.driveTrackModule.runModule();
-		log.debug("Run perception track");
-		this.perceptionTrackModule.runModule();
-		log.debug("Run evaluation track");
-		this.evaluationTrackModule.runModule();
-		log.debug("Run decision making");
-		this.decisionTrackModule.runModule();
-		log.debug("Run action track");
-		this.actionModule.runModule();
+		try {
+			this.driveTrackModule.runModule();
+			log.debug("Run perception track");
+			this.perceptionTrackModule.runModule();
+			log.debug("Run evaluation track");
+			this.evaluationTrackModule.runModule();
+			log.debug("Run decision making");
+			this.decisionTrackModule.runModule();
+			log.debug("Run action track");
+			this.actionModule.runModule();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
@@ -105,7 +111,7 @@ public class TestAgentImpl implements AgentMain {
 	public void setPerceptionInput(Map<String, Concept> perception) {
 		this.perception= perception;
 		
-		this.perceptionTrackModule.setInputData(DatapackageImpl.newDatapackage(perception));
+		this.perceptionTrackModule.setInputData(DatapackageImpl.newDatapackage(this.perception));
 	}
 
 	@Override

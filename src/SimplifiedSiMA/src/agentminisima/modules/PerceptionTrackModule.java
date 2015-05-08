@@ -1,17 +1,31 @@
 package agentminisima.modules;
 
+import agentminisima.Names;
+import datastructures.Concept;
 import framework.ModuleImpl;
 
 public class PerceptionTrackModule extends ModuleImpl {
+	
+
 
 	@Override
 	protected void executeModuleFunction() {
 		log.debug("Start perception track");
-		int inValue = Integer.valueOf(this.getInputData().getViewOfAllData().get("testvalue").getDefaultValue());
-		int outValue = inValue+1;
-		this.getOutputData().setContent("testvalue2", String.valueOf(outValue));
+		//Get body perception
+		Concept bodyperception = this.getInputData().get(Names.BODYPERCEPTIONADDRESS);
 		
-		log.debug("Received invalue={}. Set outvalue={}", inValue, outValue);
+		//Get external perception
+		Concept externalPerception = this.getInputData().get(Names.EXTERNALPERCEPTIONADDRESS);
+		
+		//Generate a self
+		Concept self = Concept.newConcept(Names.SELFADDRESS).addSubconcept(bodyperception).build();
+		
+		//Create an image from the objects if necessary
+		Concept perceivedImage = Concept.newConcept(externalPerception, Names.PERCEIVEDIMAGEADDRESS).addSubconcept(self).build();
+		
+		//Set output
+		this.getOutputData().setContent(perceivedImage);
+		log.debug("Perceived Image={}", perceivedImage);
 		
 	}
 

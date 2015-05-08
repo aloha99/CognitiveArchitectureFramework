@@ -14,6 +14,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 
 import datastructures.Concept;
+import datastructures.Datapackage;
+import datastructures.DatapackageImpl;
 import datastructures.Concept.ConceptBuilder;
 
 public class ModuleTest {

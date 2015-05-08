@@ -6,6 +6,9 @@ import logger.MyLogger;
 
 import org.slf4j.Logger;
 
+import datastructures.Datapackage;
+import datastructures.DatapackageImpl;
+
 public abstract class ModuleImpl implements Module, ModuleListener {
 	
 	protected static final Logger log = MyLogger.getLog("Sima");
@@ -19,12 +22,18 @@ public abstract class ModuleImpl implements Module, ModuleListener {
 	private String moduleId;
 	
 	@Override
-	public void runModule() {
-		//Execute the function of the module
-		this.executeModuleFunction();
+	public void runModule() throws Exception {
+		try {
+			//Execute the function of the module
+			this.executeModuleFunction();
+			
+			//Update listeners
+			this.updateListeners();
+		} catch (Exception e) {
+			log.error("Cannot execute module", e);
+			throw new Exception(e.getMessage());
+		}
 		
-		//Update listeners
-		this.updateListeners();
 		
 	}
 	
@@ -63,7 +72,7 @@ public abstract class ModuleImpl implements Module, ModuleListener {
 	
 	@Override
 	public void setInputData(Datapackage data) {
-		this.inputData.clear();
+		//this.inputData.clear();
 		this.inputData.setContent(data.getViewOfAllData());
 		
 	}

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Concept {
+	private final static Concept nullConcept = Concept.newConcept("null").build();
 	private static long conceptCount;
 	
 	private final String emptyString = "";
@@ -17,7 +18,7 @@ public class Concept {
 	private final ArrayList<Concept> subConcepts = new ArrayList<Concept>();
 	private Concept superConcept = null;
 	
-	public Concept(String name) {
+	private Concept(String name) {
 		this.name = name;
 		conceptCount++;
 		this.id = this.name + String.valueOf(conceptCount);
@@ -29,13 +30,14 @@ public class Concept {
 	 * 
 	 * @param concept
 	 */
-	public Concept(Concept concept) {
+	private Concept(Concept concept) {
 		this.id = concept.id;
 		this.name = concept.name;
 		this.values.putAll(concept.values);
 		
 		//Java 1.8 parallelized copying of concepts
-		this.subConcepts.forEach((Concept subconcept)->this.subConcepts.add(new Concept(subconcept)));
+		concept.subConcepts.forEach((Concept subconcept)->this.subConcepts.add(new Concept(subconcept)));
+		
 		if (concept.superConceptExist()==true) {
 			this.superConcept = new Concept(concept.superConcept);
 		}
@@ -93,12 +95,13 @@ public class Concept {
 		return Collections.unmodifiableList(subConcepts);
 	}
 	
-	public Concept getSubConcept(String id) {
-		Concept result = null;
+	public Concept getSubConcept(String name) {
+		Concept result = Concept.nullConcept();
 		
 		for (Concept subConcept : this.subConcepts) {
-			if (subConcept.getId().equals(id)) {
+			if (subConcept.getName().equals(name)) {
 				result = subConcept;
+				break;
 			}
 		}
 		
@@ -140,8 +143,20 @@ public class Concept {
 		
 	}
 	
+	public static Concept nullConcept() {
+		return Concept.nullConcept;
+	}
+	
 	public static ConceptBuilder newConcept(String name) {
 		return new ConceptBuilder(name);
+	}
+	
+	public static ConceptBuilder newConcept(Concept concept) {
+		return new ConceptBuilder(concept);
+	}
+	
+	public static ConceptBuilder newConcept(Concept concept, String name) {
+		return new ConceptBuilder(concept, name);
 	}
 	
 	public interface Build {
@@ -161,6 +176,25 @@ public class Concept {
 		
 		public ConceptBuilder(String name) {
 			this.instance = new Concept(name);
+		}
+		
+		public ConceptBuilder(Concept concept) {
+			this.instance = new Concept(concept);
+		}
+		
+		public ConceptBuilder(Concept concept, String name) {
+			Concept copy = new Concept(concept);
+			this.instance = new Concept(name);
+			
+			this.instance.values.putAll(copy.values);
+			
+			//Java 1.8 parallelized copying of concepts
+			copy.subConcepts.forEach((Concept subconcept)->this.instance.subConcepts.add(new Concept(subconcept)));
+			
+			if (concept.superConceptExist()==true) {
+				this.instance.superConcept = new Concept(copy.superConcept);
+			}
+			
 		}
 		
 		@Override

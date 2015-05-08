@@ -1,8 +1,6 @@
-package framework;
+package datastructures;
 
 import java.util.Map;
-
-import datastructures.Concept;
 
 public interface Datapackage {
 	//public String get(String address);

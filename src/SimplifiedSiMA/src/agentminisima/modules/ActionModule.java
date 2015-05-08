@@ -1,5 +1,7 @@
 package agentminisima.modules;
 
+import datastructures.Concept;
+import agentminisima.Names;
 import framework.ModuleImpl;
 
 public class ActionModule extends ModuleImpl {
@@ -7,11 +9,13 @@ public class ActionModule extends ModuleImpl {
 	@Override
 	protected void executeModuleFunction() {
 		log.debug("Start action track");
-		int inValue = Integer.valueOf(this.getInputData().get("testvalue").getDefaultValue());
-		int outValue = inValue+1;
-		this.getOutputData().setContent("testvalue", String.valueOf(outValue));
+		//Get action from input
+		Concept selectedOption = this.getInputData().get(Names.SELECTEDOPTIONADDRESS);
+		Concept action = selectedOption.getSubConcept(Names.ACTIONADDRESS);
 		
-		log.debug("Received invalue={}. Set outvalue={}", inValue, outValue);
+		
+		//Set output
+		this.getOutputData().setContent(action);
 		
 	}
 

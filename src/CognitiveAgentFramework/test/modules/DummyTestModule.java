@@ -1,6 +1,6 @@
 package modules;
 
-import framework.Datapackage;
+import datastructures.Datapackage;
 import framework.ModuleImpl;
 
 public class DummyTestModule extends ModuleImpl {

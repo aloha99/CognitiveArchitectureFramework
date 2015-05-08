@@ -1,10 +1,8 @@
-package framework;
+package datastructures;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
-import datastructures.Concept;
 
 public class DatapackageImpl implements Datapackage {
 
@@ -52,6 +50,23 @@ public class DatapackageImpl implements Datapackage {
 	public void setContent(Map<String, Concept> content) {
 		this.data.putAll(content);
 	}
+	
+	@Override
+	public Concept get(String address) {
+		Concept result = Concept.nullConcept();
+		
+		if (this.data.containsKey(address)==true) {
+			result = this.data.get(address);
+		}
+		
+		return result;
+	}
+
+	@Override
+	public void setContent(Concept content) {
+		this.data.put(content.getName(), content);
+		
+	}
 
 	@Override
 	public String toString() {
@@ -64,17 +79,6 @@ public class DatapackageImpl implements Datapackage {
 	@Override
 	public void clear() {
 		this.data.clear();
-	}
-
-	@Override
-	public Concept get(String address) {
-		return this.data.get(address);
-	}
-
-	@Override
-	public void setContent(Concept content) {
-		this.data.put(content.getName(), content);
-		
 	}
 
 }

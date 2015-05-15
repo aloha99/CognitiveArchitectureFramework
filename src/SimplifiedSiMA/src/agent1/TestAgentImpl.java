@@ -9,7 +9,7 @@ import agent1.modules.DecisionTrackModule;
 import agent1.modules.DriveTrackModule;
 import agent1.modules.EvaluationTrackModule;
 import agent1.modules.PerceptionTrackModule;
-import datastructures.Concept;
+import datastructures.ConceptImpl;
 import datastructures.Datapackage;
 import datastructures.DatapackageImpl;
 import framework.AgentMain;
@@ -20,9 +20,9 @@ public class TestAgentImpl implements AgentMain {
 	protected static final Logger log = MyLogger.getLog("Sima");
 		
 	//Inputs
-	private Map<String, Concept> drives;
-	private Map<String, Concept> bodyPerception;
-	private Map<String, Concept> perception;
+	private Map<String, ConceptImpl> drives;
+	private Map<String, ConceptImpl> bodyPerception;
+	private Map<String, ConceptImpl> perception;
 	
 	//Action
 	private String action = "";
@@ -91,7 +91,7 @@ public class TestAgentImpl implements AgentMain {
 	}
 
 	@Override
-	public void setDriveInput(Map<String, Concept> drives) {
+	public void setDriveInput(Map<String, ConceptImpl> drives) {
 		this.drives = drives;
 		
 		Datapackage driveData = DatapackageImpl.newDatapackage(this.drives);
@@ -100,7 +100,7 @@ public class TestAgentImpl implements AgentMain {
 	}
 
 	@Override
-	public void setBodyPerceptionInput(Map<String, Concept> bodyPerception) {
+	public void setBodyPerceptionInput(Map<String, ConceptImpl> bodyPerception) {
 		this.bodyPerception = bodyPerception;
 		
 		Datapackage bodyPerceptionData = DatapackageImpl.newDatapackage(this.bodyPerception);
@@ -108,7 +108,7 @@ public class TestAgentImpl implements AgentMain {
 	}
 
 	@Override
-	public void setPerceptionInput(Map<String, Concept> perception) {
+	public void setPerceptionInput(Map<String, ConceptImpl> perception) {
 		this.perception= perception;
 		
 		this.perceptionTrackModule.setInputData(DatapackageImpl.newDatapackage(this.perception));
@@ -139,6 +139,6 @@ public class TestAgentImpl implements AgentMain {
 
 	@Override
 	public String getActionModuleOutput(String key) {
-		return this.actionModule.getOutputData().getViewOfAllData().get(key).getDefaultValue();
+		return this.actionModule.getOutputData().getViewOfAllConcepts().get(key).getDefaultValue();
 	}
 }

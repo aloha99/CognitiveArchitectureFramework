@@ -1,20 +1,20 @@
 package datastructures;
 
 public class Link {
-	private final Concept rootElement;
-	private final Concept leafElement;
+	private final ConceptImpl rootElement;
+	private final ConceptImpl leafElement;
 	
-	public Link(Concept rootElement, Concept leafElement) {
+	public Link(ConceptImpl rootElement, ConceptImpl leafElement) {
 		super();
 		this.rootElement = rootElement;
 		this.leafElement = leafElement;
 	}
 
-	public Concept getRootElement() {
+	public ConceptImpl getRootElement() {
 		return rootElement;
 	}
 
-	public Concept getLeafElement() {
+	public ConceptImpl getLeafElement() {
 		return leafElement;
 	}
 }

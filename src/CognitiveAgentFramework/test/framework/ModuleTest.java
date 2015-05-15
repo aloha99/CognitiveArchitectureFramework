@@ -14,9 +14,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 
 import datastructures.Concept;
+import datastructures.ConceptImpl;
 import datastructures.Datapackage;
 import datastructures.DatapackageImpl;
-import datastructures.Concept.ConceptBuilder;
+import datastructures.ConceptImpl.ConceptBuilder;
 
 public class ModuleTest {
 	
@@ -71,11 +72,14 @@ public class ModuleTest {
 			module.init("PERCEPTIONTESTER");
 			module.setTargetAddress("PERCEPTION");
 			
+			//Create an empty data package, which shall keep all concepts
+			Datapackage perceptionPackage = DatapackageImpl.newDatapackage();
+			
 			//Create fake perception with concepts
 			//Create perception
-			ConceptBuilder perceptionBuilder = Concept.newConcept("PERCEPTION");
+			ConceptBuilder perceptionBuilder = ConceptImpl.newConcept("PERCEPTION");
 			for (int i=0;i<5;i++) {
-				Concept percept = Concept.newConcept("id" + i).
+				Concept percept = ConceptImpl.newConcept("id" + i).
 						newValue(BODYTYPE, "bodytypeSchnitzel").
 						newValue(X, String.valueOf(i)).
 						newValue(Y, String.valueOf(i+1)).
@@ -83,15 +87,16 @@ public class ModuleTest {
 						newValue(OBJECTNAME, "Schnitzel").
 						build();
 				
-				perceptionBuilder.addSubconcept(percept);
+				perceptionBuilder.addSubconcept(percept, perceptionPackage);
 			}
 			
 			Concept perception = perceptionBuilder.build();
-			Map<String, Concept> perceptionMap = new HashMap<String, Concept>();
-			perceptionMap.put(perception.getName(), perception);
+			//Map<String, Concept> perceptionMap = new HashMap<String, Concept>();
+			//perceptionMap.put(perception.getName(), perception);
+			perceptionPackage.setContent(perception);
 			
 			//Set input
-			module.setInputData(DatapackageImpl.newDatapackage(perceptionMap));
+			module.setInputData(DatapackageImpl.newDatapackage(perceptionPackage));
 			
 			//Run module
 			module.runModule();
@@ -99,9 +104,9 @@ public class ModuleTest {
 			//Get output Schnitzel5 X and Y position
 			Concept actualPerception = module.getOutputData().get("PERCEPTION");
 			
-			int actualx = Integer.valueOf(actualPerception.getSubConcept("id46").getValue(X));
-			int actualy = Integer.valueOf(actualPerception.getSubConcept("id46").getValue(Y));
-			String actualobjectid  = actualPerception.getSubConcept("id46").getValue(OBJECTID);
+			int actualx = Integer.valueOf(actualPerception.getSubConcept("id46", module.getOutputData()).getValue(X));
+			int actualy = Integer.valueOf(actualPerception.getSubConcept("id46", module.getOutputData()).getValue(Y));
+			String actualobjectid  = actualPerception.getSubConcept("id46", module.getOutputData()).getValue(OBJECTID);
 			
 			//Expected values
 			int expectedX = 4;

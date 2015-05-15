@@ -9,7 +9,7 @@ public class DummyPerceptionModule extends ModuleImpl {
 	@Override
 	protected void executeModuleFunction() {
 		log.debug("Input={}", this.getInputData().get(this.targetAddress));
-		this.getOutputData().setContent(this.getInputData().getViewOfAllData());
+		this.getOutputData().setContent(this.getInputData().getViewOfAllConcepts());
 
 	}
 	

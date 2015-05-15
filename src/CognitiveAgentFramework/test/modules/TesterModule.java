@@ -7,7 +7,7 @@ public class TesterModule extends ModuleImpl {
 	@Override
 	protected void executeModuleFunction() {
 		//Set input as output data
-		this.getOutputData().setContent(this.getInputData().getViewOfAllData());
+		this.getOutputData().setContent(this.getInputData().getViewOfAllConcepts());
 	}
 	
 	public void setValue(String address, String value) {

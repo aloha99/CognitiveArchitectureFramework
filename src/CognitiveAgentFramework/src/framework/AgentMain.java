@@ -3,6 +3,8 @@ package framework;
 import java.util.Map;
 
 import datastructures.Concept;
+import datastructures.ConceptImpl;
+import datastructures.Datapackage;
 
 public interface AgentMain {
 	public void init();
@@ -10,9 +12,9 @@ public interface AgentMain {
 	/**
 	 * @param drives: id and intensity for [0,1]
 	 */
-	public void setDriveInput(Map<String, Concept> drives);
-	public void setBodyPerceptionInput(Map<String, Concept> bodyPerception);
-	public void setPerceptionInput(Map<String, Concept> perception);
+	public void setDriveInput(Datapackage drives);
+	public void setBodyPerceptionInput(Datapackage bodyPerception);
+	public void setPerceptionInput(Datapackage perception);
 	public String getAction();
 	public String getActionModuleOutput(String key);
 	public void killMind();

@@ -73,7 +73,7 @@ public abstract class ModuleImpl implements Module, ModuleListener {
 	@Override
 	public void setInputData(Datapackage data) {
 		//this.inputData.clear();
-		this.inputData.setContent(data.getViewOfAllData());
+		this.inputData.setContent(data.getViewOfAllConcepts());
 		
 	}
 
@@ -88,7 +88,7 @@ public abstract class ModuleImpl implements Module, ModuleListener {
 	@Override
 	public void update(Datapackage data) {
 		//Update data
-		this.getInputData().setContent(data.getViewOfAllData());
+		this.getInputData().setContent(data.getViewOfAllConcepts());
 		log.debug("Update module={} with incoming data={}", this.getModuleId(), data);
 	}
 

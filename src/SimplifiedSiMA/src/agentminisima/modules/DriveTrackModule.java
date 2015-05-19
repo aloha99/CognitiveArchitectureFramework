@@ -1,7 +1,7 @@
 package agentminisima.modules;
 
 import agentminisima.Names;
-import datastructures.ConceptImpl;
+import datastructures.Concept;
 import framework.ModuleImpl;
 
 public class DriveTrackModule extends ModuleImpl {
@@ -15,7 +15,7 @@ public class DriveTrackModule extends ModuleImpl {
 		
 		log.debug("Start drive track");
 		//Get the intensity of the drive HUNGER
-		ConceptImpl hungerDrive = this.getInputData().get(Names.DRIVE1NAME);
+		Concept hungerDrive = this.getInputData().get(Names.DRIVE1NAME);
 		//double hungerDriveIntensity = Double.valueOf(hungerDrive.getDefaultValue());
 		
 		//Add driveobject and action

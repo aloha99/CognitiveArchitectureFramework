@@ -1,6 +1,7 @@
 package agentminisima.modules;
 
 import agentminisima.Names;
+import datastructures.Concept;
 import datastructures.ConceptImpl;
 import framework.ModuleImpl;
 
@@ -19,7 +20,7 @@ public class EvaluationTrackModule extends ModuleImpl {
 		
 		//Check the drive reward
 		//Get the intensity of the drive HUNGER
-		ConceptImpl hungerDrive = this.getInputData().get(Names.DRIVE1NAME);
+		Concept hungerDrive = this.getInputData().get(Names.DRIVE1NAME);
 		double hungerDriveIntensity = Double.valueOf(hungerDrive.getDefaultValue());
 		//Compare with previous hunger intensity and calculate the reward
 		this.hungerReward = - (hungerDriveIntensity - previousHungerIntensity);

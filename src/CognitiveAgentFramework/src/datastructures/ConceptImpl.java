@@ -286,11 +286,11 @@ public class ConceptImpl implements Concept {
 		return new ConceptBuilder(name);
 	}
 
-	public static ConceptBuilder newConcept(ConceptImpl concept) {
+	public static ConceptBuilder newConcept(Concept concept) {
 		return new ConceptBuilder(concept);
 	}
 
-	public static ConceptBuilder newConcept(ConceptImpl concept, String name) {
+	public static ConceptBuilder newConcept(Concept concept, String name) {
 		return new ConceptBuilder(concept, name);
 	}
 

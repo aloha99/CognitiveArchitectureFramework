@@ -1,5 +1,6 @@
 package agentminisima.modules;
 
+import datastructures.Concept;
 import datastructures.ConceptImpl;
 import agentminisima.Actions;
 import agentminisima.Names;
@@ -11,15 +12,15 @@ public class OptionsTrackModule extends ModuleImpl {
 	protected void executeModuleFunction() {
 		//=== Get inputs ===//
 		//Get drive wishes
-		ConceptImpl driveWishes = this.getInputData().get(Names.DRIVEWISHESADDRESS);
+		Concept driveWishes = this.getInputData().get(Names.DRIVEWISHESADDRESS);
 		//Get activated seqeunces
-		ConceptImpl episodes = this.getInputData().get(Names.EPISODESADDRESS);
+		Concept episodes = this.getInputData().get(Names.EPISODESADDRESS);
 		
 		//Get emotions
 		//TODO: Implement emotions
 		
 		//Get current state
-		ConceptImpl currentState = this.getInputData().get(Names.CURRENTSTATEADDRESS);
+		Concept currentState = this.getInputData().get(Names.CURRENTSTATEADDRESS);
 		
 		
 		//=== Generate options ===//
@@ -27,8 +28,8 @@ public class OptionsTrackModule extends ModuleImpl {
 		//FIXME: Just generate random action
 		String[] actions = Actions.getAllActions();
 		String action = actions[(int) (actions.length*Math.random())];
-		ConceptImpl option1 = ConceptImpl.newConcept("RANDOMOPTION").
-				addSubconcept(ConceptImpl.newConcept(Names.ACTIONADDRESS).newDefaultValue(action).build()).
+		Concept option1 = ConceptImpl.newConcept("RANDOMOPTION").
+				addSubconcept(ConceptImpl.newConcept(Names.ACTIONADDRESS).newDefaultValue(action).build(), this.getOutputData()).
 				build();
 		
 		
@@ -36,7 +37,7 @@ public class OptionsTrackModule extends ModuleImpl {
 		
 		
 		//=== Select option ===//
-		ConceptImpl selectedOption = ConceptImpl.newConcept(option1, Names.SELECTEDOPTIONADDRESS).build();
+		Concept selectedOption = ConceptImpl.newConcept(option1, Names.SELECTEDOPTIONADDRESS).build();
 		
 		
 		//=== Set output ===//

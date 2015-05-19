@@ -12,6 +12,8 @@ import org.slf4j.Logger;
 
 import agent1.TestAgentImpl;
 import datastructures.ConceptImpl;
+import datastructures.Datapackage;
+import datastructures.DatapackageImpl;
 import framework.AgentMain;
 
 public class SimaAgentTest {
@@ -29,11 +31,14 @@ public class SimaAgentTest {
 			int driveInput = 0;
 			int perceptionInput = 0;
 			
-			Map<String, ConceptImpl> driveMap = new HashMap<String, ConceptImpl>();
-			driveMap.put(address, ConceptImpl.newConcept(address).newDefaultValue(String.valueOf(driveInput)).build());
+			//Map<String, ConceptImpl> driveMap = new HashMap<String, ConceptImpl>();
+			Datapackage driveMap = DatapackageImpl.newDatapackage();
+			driveMap.setContent(ConceptImpl.newConcept(address).newDefaultValue(String.valueOf(driveInput)).build());
+			//driveMap.put(address, ConceptImpl.newConcept(address).newDefaultValue(String.valueOf(driveInput)).build());
 			
-			Map<String, ConceptImpl> perceptionMap = new HashMap<String, ConceptImpl>();
-			perceptionMap.put(address, ConceptImpl.newConcept(address).newDefaultValue(String.valueOf(perceptionInput)).build());
+			//Map<String, ConceptImpl> perceptionMap = new HashMap<String, ConceptImpl>();
+			Datapackage perceptionMap = DatapackageImpl.newDatapackage();
+			perceptionMap.setContent(ConceptImpl.newConcept(address).newDefaultValue(String.valueOf(perceptionInput)).build());
 			
 			simaAgent.init();
 			

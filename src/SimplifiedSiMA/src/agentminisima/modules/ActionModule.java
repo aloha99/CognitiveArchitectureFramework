@@ -1,5 +1,6 @@
 package agentminisima.modules;
 
+import datastructures.Concept;
 import datastructures.ConceptImpl;
 import agentminisima.Names;
 import framework.ModuleImpl;
@@ -10,8 +11,8 @@ public class ActionModule extends ModuleImpl {
 	protected void executeModuleFunction() {
 		log.debug("Start action track");
 		//Get action from input
-		ConceptImpl selectedOption = this.getInputData().get(Names.SELECTEDOPTIONADDRESS);
-		ConceptImpl action = selectedOption.getSubConcept(Names.ACTIONADDRESS);
+		Concept selectedOption = this.getInputData().get(Names.SELECTEDOPTIONADDRESS);
+		Concept action = selectedOption.getSubConcept(Names.ACTIONADDRESS, this.getInputData());
 		
 		
 		//Set output

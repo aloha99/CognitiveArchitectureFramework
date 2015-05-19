@@ -1,9 +1,5 @@
 package framework;
 
-import java.util.Map;
-
-import datastructures.Concept;
-import datastructures.ConceptImpl;
 import datastructures.Datapackage;
 
 public interface AgentMain {

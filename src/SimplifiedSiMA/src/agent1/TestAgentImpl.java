@@ -20,9 +20,9 @@ public class TestAgentImpl implements AgentMain {
 	protected static final Logger log = MyLogger.getLog("Sima");
 		
 	//Inputs
-	private Map<String, ConceptImpl> drives;
-	private Map<String, ConceptImpl> bodyPerception;
-	private Map<String, ConceptImpl> perception;
+	//private this.getInputData() drives;
+	//private Map<String, ConceptImpl> bodyPerception;
+	//private Map<String, ConceptImpl> perception;
 	
 	//Action
 	private String action = "";
@@ -91,27 +91,27 @@ public class TestAgentImpl implements AgentMain {
 	}
 
 	@Override
-	public void setDriveInput(Map<String, ConceptImpl> drives) {
-		this.drives = drives;
+	public void setDriveInput(Datapackage drives) {
+		//this.drives = drives;
 		
-		Datapackage driveData = DatapackageImpl.newDatapackage(this.drives);
+		Datapackage driveData = DatapackageImpl.newDatapackage(drives);
 		this.driveTrackModule.setInputData(driveData);
 		
 	}
 
 	@Override
-	public void setBodyPerceptionInput(Map<String, ConceptImpl> bodyPerception) {
-		this.bodyPerception = bodyPerception;
+	public void setBodyPerceptionInput(Datapackage bodyPerception) {
+		//this.bodyPerception = bodyPerception;
 		
-		Datapackage bodyPerceptionData = DatapackageImpl.newDatapackage(this.bodyPerception);
+		Datapackage bodyPerceptionData = DatapackageImpl.newDatapackage(bodyPerception);
 		this.perceptionTrackModule.setInputData(bodyPerceptionData);
 	}
 
 	@Override
-	public void setPerceptionInput(Map<String, ConceptImpl> perception) {
-		this.perception= perception;
+	public void setPerceptionInput(Datapackage perception) {
+		//this.perception= perception;
 		
-		this.perceptionTrackModule.setInputData(DatapackageImpl.newDatapackage(this.perception));
+		this.perceptionTrackModule.setInputData(DatapackageImpl.newDatapackage(perception));
 	}
 
 	@Override

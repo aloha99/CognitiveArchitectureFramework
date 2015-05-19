@@ -10,8 +10,11 @@ import logger.MyLogger;
 import org.junit.Test;
 import org.slf4j.Logger;
 
+import datastructures.Concept;
 import datastructures.ConceptImpl;
 import datastructures.ConceptImpl.ConceptBuilder;
+import datastructures.Datapackage;
+import datastructures.DatapackageImpl;
 import framework.AgentMain;
 
 public class AgentMiniSimaTest {
@@ -34,9 +37,10 @@ public class AgentMiniSimaTest {
 			//Create inputs
 			//Create fake perception with concepts
 			//Create perception
+			Datapackage perceptionMap = DatapackageImpl.newDatapackage();
 			ConceptBuilder perceptionBuilder = ConceptImpl.newConcept(Names.EXTERNALPERCEPTIONADDRESS);
 			for (int i=0;i<5;i++) {
-				ConceptImpl percept = ConceptImpl.newConcept("id" + i).
+				Concept percept = ConceptImpl.newConcept("id" + i).
 						newValue(BODYTYPE, "bodytypeSchnitzel").
 						newValue(X, String.valueOf(i)).
 						newValue(Y, String.valueOf(i+1)).
@@ -44,20 +48,20 @@ public class AgentMiniSimaTest {
 						newValue(OBJECTNAME, "Schnitzel").
 						build();
 				
-				perceptionBuilder.addSubconcept(percept);
+				perceptionBuilder.addSubconcept(percept, perceptionMap);
 			}
 			
-			ConceptImpl perception = perceptionBuilder.build();
-			Map<String, ConceptImpl> perceptionMap = new HashMap<String, ConceptImpl>();
-			perceptionMap.put(perception.getName(), perception);
+			Concept perception = perceptionBuilder.build();
+			perceptionMap.setContent(perception);
+			//perceptionMap.put(perception.getName(), perception);
 			
 			//Create drive input
-			Map<String, ConceptImpl> drivesMap = new HashMap<String, ConceptImpl>();
-			drivesMap.put(Names.DRIVE1NAME, ConceptImpl.newConcept(Names.DRIVE1NAME).newDefaultValue("0.6").build());
+			Datapackage drivesMap = DatapackageImpl.newDatapackage();
+			drivesMap.setContent(ConceptImpl.newConcept(Names.DRIVE1NAME).newDefaultValue("0.6").build());
 			
 			//Create body perception input
-			Map<String, ConceptImpl> bodyperceptionMap = new HashMap<String, ConceptImpl>();
-			bodyperceptionMap.put(Names.BODYPERCEPTIONADDRESS, ConceptImpl.newConcept(Names.BODYPERCEPTIONADDRESS).newDefaultValue("-0.2").build());
+			Datapackage bodyperceptionMap =  DatapackageImpl.newDatapackage();
+			bodyperceptionMap.setContent(ConceptImpl.newConcept(Names.BODYPERCEPTIONADDRESS).newDefaultValue("-0.2").build());
 			
 			//Set input
 			simaAgent.setPerceptionInput(perceptionMap);

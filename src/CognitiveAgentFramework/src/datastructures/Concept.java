@@ -100,7 +100,7 @@ public interface Concept {
 	public List<Concept> getAssociatedConcepts(String predicate, Datapackage container);
 	public void setAssociatedConcept(String predicate, Concept concept, Datapackage container);
 	public void setAssociatedConcept(String predicate, Concept concept, double weight, Datapackage container);
-	public void addAssociatedConcept(String predicate, Concept concept, Datapackage container);
-	public void addAssociatedConcept(String predicate, Concept concept, double weight, Datapackage container);
+	public void addAssociatedConcept(String predicate, Concept concept, Datapackage container) throws Exception;
+	public void addAssociatedConcept(String predicate, Concept concept, double weight, Datapackage container) throws Exception;
 	
 }

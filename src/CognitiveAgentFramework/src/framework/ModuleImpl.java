@@ -88,7 +88,7 @@ public abstract class ModuleImpl implements Module, ModuleListener {
 	@Override
 	public void update(Datapackage data) {
 		//Update data
-		this.getInputData().setContent(data.getViewOfAllConcepts());
+		this.getInputData().setConcent(data);
 		log.debug("Update module={} with incoming data={}", this.getModuleId(), data);
 	}
 

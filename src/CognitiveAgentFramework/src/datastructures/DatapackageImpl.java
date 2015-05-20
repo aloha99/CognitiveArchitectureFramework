@@ -21,6 +21,7 @@ public class DatapackageImpl implements Datapackage {
 	
 	private DatapackageImpl(Datapackage data) {
 		this.setContent(data.getViewOfAllConcepts());
+		this.setIdsForContent(data.getViewOfAllConceptsByID());
 	}
 	
 	public static Datapackage newDatapackage() {
@@ -97,6 +98,13 @@ public class DatapackageImpl implements Datapackage {
 	@Override
 	public Map<String, Concept> getViewOfAllConceptsByID() {
 		return Collections.unmodifiableMap(this.availableConcepts);
+	}
+
+	@Override
+	public void setConcent(Datapackage datapackage) {
+		this.setContent(datapackage.getViewOfAllConcepts());
+		this.setIdsForContent(datapackage.getViewOfAllConceptsByID());
+		
 	}
 
 	@Override

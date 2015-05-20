@@ -68,6 +68,8 @@ public interface Datapackage {
 	 * @return
 	 */
 	public Map<String, Concept> getViewOfAllConceptsByID();
+	
+	public void setConcent(Datapackage datapackage);
 
 	/**
 	 * Clear the whole datapackage from all concepts

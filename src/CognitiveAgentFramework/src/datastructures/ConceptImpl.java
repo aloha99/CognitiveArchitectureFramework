@@ -25,6 +25,7 @@ public class ConceptImpl implements Concept {
 	private final String name;
 	private final String id;
 	private final Map<String, ArrayList<String>> values = new HashMap<String, ArrayList<String>>();
+	//private final Map<String, Double> weights = new HashMap<String, Double>();
 	private final Map<String, ArrayList<String>> associatedConcepts = new HashMap<String, ArrayList<String>>();
 	//private final ArrayList<ConceptImpl> subConcepts = new ArrayList<ConceptImpl>();
 	//private ConceptImpl superConcept = null;
@@ -171,7 +172,13 @@ public class ConceptImpl implements Concept {
 	}
 	
 	@Override
-	public void addAssociatedConcept(String predicate, Concept concept, Datapackage container) {
+	public void addAssociatedConcept(String predicate, Concept concept, Datapackage container) throws Exception {
+		addAssociatedConcept(predicate, concept, 1.0, container);
+		
+	}
+
+	@Override
+	public void addAssociatedConcept(String predicate, Concept concept, double weight, Datapackage container) throws Exception {
 		if (this.getAssociatedConcepts().containsKey(predicate)==false) {
 			this.setAssociatedConcept(predicate, concept, container);
 		} else {
@@ -179,11 +186,12 @@ public class ConceptImpl implements Concept {
 			container.setConceptByID(concept);
 		}
 		
-	}
-
-	@Override
-	public void addAssociatedConcept(String predicate, Concept concept, double weight, Datapackage container) {
-		// TODO Auto-generated method stub
+		//Add weight
+		if (weight!=1.0) {
+			//this.getWeights().put(concept.getId(), weight);
+		} else if (weight==0.0) {
+			throw new Exception("Cannot add a weight that is 0.0 because it is then no association");
+		}
 		
 	}
 
@@ -299,7 +307,7 @@ public class ConceptImpl implements Concept {
 		Build newDefaultValue(String value);
 		Build addSubconcept(Concept concept, Datapackage datapackage);
 		Build setSuperconcept(Concept concept, Datapackage datapackage);
-		Build addAssociatedConcept(String predicate, Concept concept, Datapackage datapackage);
+		Build addAssociatedConcept(String predicate, Concept concept, Datapackage datapackage) throws Exception;
 		Concept build();
 	}
 	
@@ -360,7 +368,7 @@ public class ConceptImpl implements Concept {
 		}
 
 		@Override
-		public Build addAssociatedConcept(String predicate, Concept concept, Datapackage datapackage) {
+		public Build addAssociatedConcept(String predicate, Concept concept, Datapackage datapackage) throws Exception {
 			this.instance.addAssociatedConcept(predicate, concept, datapackage);
 			return this;
 		}

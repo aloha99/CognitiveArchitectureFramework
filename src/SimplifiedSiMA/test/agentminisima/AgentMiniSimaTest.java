@@ -79,7 +79,7 @@ public class AgentMiniSimaTest {
 				testResult = true;
 			}
 			
-			assert(testResult);
+			assertTrue(testResult);
 			
 		} catch (Exception e) {
 			log.error("Cannot execute test", e);

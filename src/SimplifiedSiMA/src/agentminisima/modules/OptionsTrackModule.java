@@ -37,6 +37,7 @@ public class OptionsTrackModule extends ModuleImpl {
 		
 		
 		//=== Select option ===//
+		//newConcept only copies the strings but not any sub concepts
 		Concept selectedOption = ConceptImpl.newConcept(option1, Names.SELECTEDOPTIONADDRESS).build();
 		
 		

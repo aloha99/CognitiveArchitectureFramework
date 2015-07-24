@@ -1,8 +1,8 @@
 package agentminisima.modules;
 
 import agentminisima.Names;
-import datastructures.Concept;
-import datastructures.ConceptImpl;
+import datastructures.Chunk;
+import datastructures.ChunkImpl;
 import framework.ModuleImpl;
 
 public class ActivationTrackModule extends ModuleImpl {
@@ -14,7 +14,7 @@ public class ActivationTrackModule extends ModuleImpl {
 		
 		
 		
-		Concept activatedImages = ConceptImpl.newConcept(Names.ACTIVATEDIMAGESADDRESS).build();
+		Chunk activatedImages = ChunkImpl.newChunk(Names.ACTIVATEDIMAGESADDRESS).build();
 		this.getOutputData().setContent(activatedImages);
 	}
 

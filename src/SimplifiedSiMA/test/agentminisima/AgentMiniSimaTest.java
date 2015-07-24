@@ -10,9 +10,9 @@ import logger.MyLogger;
 import org.junit.Test;
 import org.slf4j.Logger;
 
-import datastructures.Concept;
-import datastructures.ConceptImpl;
-import datastructures.ConceptImpl.ConceptBuilder;
+import datastructures.Chunk;
+import datastructures.ChunkImpl;
+import datastructures.ChunkImpl.ChunkBuilder;
 import datastructures.Datapackage;
 import datastructures.DatapackageImpl;
 import framework.AgentMain;
@@ -38,9 +38,9 @@ public class AgentMiniSimaTest {
 			//Create fake perception with concepts
 			//Create perception
 			Datapackage perceptionMap = DatapackageImpl.newDatapackage();
-			ConceptBuilder perceptionBuilder = ConceptImpl.newConcept(Names.EXTERNALPERCEPTIONADDRESS);
+			ChunkBuilder perceptionBuilder = ChunkImpl.newChunk(Names.EXTERNALPERCEPTIONADDRESS);
 			for (int i=0;i<5;i++) {
-				Concept percept = ConceptImpl.newConcept("id" + i).
+				Chunk percept = ChunkImpl.newChunk("id" + i).
 						newValue(BODYTYPE, "bodytypeSchnitzel").
 						newValue(X, String.valueOf(i)).
 						newValue(Y, String.valueOf(i+1)).
@@ -48,20 +48,20 @@ public class AgentMiniSimaTest {
 						newValue(OBJECTNAME, "Schnitzel").
 						build();
 				
-				perceptionBuilder.addSubconcept(percept, perceptionMap);
+				perceptionBuilder.addSubChunk(percept, perceptionMap);
 			}
 			
-			Concept perception = perceptionBuilder.build();
+			Chunk perception = perceptionBuilder.build();
 			perceptionMap.setContent(perception);
 			//perceptionMap.put(perception.getName(), perception);
 			
 			//Create drive input
 			Datapackage drivesMap = DatapackageImpl.newDatapackage();
-			drivesMap.setContent(ConceptImpl.newConcept(Names.DRIVE1NAME).newDefaultValue("0.6").build());
+			drivesMap.setContent(ChunkImpl.newChunk(Names.DRIVE1NAME).newDefaultValue("0.6").build());
 			
 			//Create body perception input
 			Datapackage bodyperceptionMap =  DatapackageImpl.newDatapackage();
-			bodyperceptionMap.setContent(ConceptImpl.newConcept(Names.BODYPERCEPTIONADDRESS).newDefaultValue("-0.2").build());
+			bodyperceptionMap.setContent(ChunkImpl.newChunk(Names.BODYPERCEPTIONADDRESS).newDefaultValue("-0.2").build());
 			
 			//Set input
 			simaAgent.setPerceptionInput(perceptionMap);

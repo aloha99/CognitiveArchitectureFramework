@@ -1,7 +1,7 @@
 package agentminisima.modules;
 
-import datastructures.Concept;
-import datastructures.ConceptImpl;
+import datastructures.Chunk;
+import datastructures.ChunkImpl;
 import agentminisima.Names;
 import framework.ModuleImpl;
 
@@ -11,8 +11,8 @@ public class ActionModule extends ModuleImpl {
 	protected void executeModuleFunction() {
 		log.debug("Start action track");
 		//Get action from input
-		Concept selectedOption = this.getInputData().get(Names.SELECTEDOPTIONADDRESS);
-		Concept action = selectedOption.getSubConcept(Names.ACTIONADDRESS, this.getInputData());
+		Chunk selectedOption = this.getInputData().get(Names.SELECTEDOPTIONADDRESS);
+		Chunk action = selectedOption.getSubChunk(Names.ACTIONADDRESS, this.getInputData());
 		
 		
 		//Set output

@@ -1,8 +1,8 @@
 package agentminisima.modules;
 
 import agentminisima.Names;
-import datastructures.Concept;
-import datastructures.ConceptImpl;
+import datastructures.Chunk;
+import datastructures.ChunkImpl;
 import framework.ModuleImpl;
 
 public class PerceptionTrackModule extends ModuleImpl {
@@ -13,16 +13,16 @@ public class PerceptionTrackModule extends ModuleImpl {
 	protected void executeModuleFunction() {
 		log.debug("Start perception track");
 		//Get body perception
-		Concept bodyperception = this.getInputData().get(Names.BODYPERCEPTIONADDRESS);
+		Chunk bodyperception = this.getInputData().get(Names.BODYPERCEPTIONADDRESS);
 		
 		//Get external perception
-		Concept externalPerception = this.getInputData().get(Names.EXTERNALPERCEPTIONADDRESS);
+		Chunk externalPerception = this.getInputData().get(Names.EXTERNALPERCEPTIONADDRESS);
 		
 		//Generate a self
-		Concept self = ConceptImpl.newConcept(Names.SELFADDRESS).addSubconcept(bodyperception, this.getOutputData()).build();
+		Chunk self = ChunkImpl.newChunk(Names.SELFADDRESS).addSubChunk(bodyperception, this.getOutputData()).build();
 		
 		//Create an image from the objects if necessary
-		Concept perceivedImage = ConceptImpl.newConcept(externalPerception, Names.PERCEIVEDIMAGEADDRESS).addSubconcept(self, this.getOutputData()).build();
+		Chunk perceivedImage = ChunkImpl.newChunk(externalPerception, Names.PERCEIVEDIMAGEADDRESS).addSubChunk(self, this.getOutputData()).build();
 		
 		//Set output
 		this.getOutputData().setContent(perceivedImage);

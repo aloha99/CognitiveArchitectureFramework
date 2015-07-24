@@ -10,7 +10,7 @@ public interface Datapackage {
 	 * @param address
 	 * @return
 	 */
-	public Concept get(String address);
+	public Chunk get(String address);
 	
 	
 	/**
@@ -18,7 +18,7 @@ public interface Datapackage {
 	 * 
 	 * @return
 	 */
-	public Map<String, Concept> getViewOfAllConcepts();
+	public Map<String, Chunk> getViewOfAllConcepts();
 
 	/**
 	 * Create a new concept by address, where a concept is generated from the string.
@@ -34,7 +34,7 @@ public interface Datapackage {
 	 * 
 	 * @param content
 	 */
-	public void setContent(Map<String, Concept> content);
+	public void setContent(Map<String, Chunk> content);
 	
 	
 	/**
@@ -42,7 +42,7 @@ public interface Datapackage {
 	 * 
 	 * @param content
 	 */
-	public void setContent(Concept content);
+	public void setContent(Chunk content);
 	
 	/**
 	 * Get a concept by its ID
@@ -50,7 +50,7 @@ public interface Datapackage {
 	 * @param id
 	 * @return
 	 */
-	public Concept getConceptByID(String id);
+	public Chunk getChunkByID(String id);
 	
 	/**
 	 * Set a concept in the data package with the concept ID as key. Hereby, no address is set. 
@@ -58,7 +58,7 @@ public interface Datapackage {
 	 * 
 	 * @param concept
 	 */
-	public void setConceptByID(Concept concept);
+	public void setConceptByID(Chunk concept);
 	
 	
 	/**
@@ -67,7 +67,7 @@ public interface Datapackage {
 	 * 
 	 * @return
 	 */
-	public Map<String, Concept> getViewOfAllConceptsByID();
+	public Map<String, Chunk> getViewOfAllConceptsByID();
 	
 	public void setConcent(Datapackage datapackage);
 

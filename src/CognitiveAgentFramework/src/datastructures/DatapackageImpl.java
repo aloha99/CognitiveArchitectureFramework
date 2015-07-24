@@ -9,11 +9,11 @@ public class DatapackageImpl implements Datapackage {
 	/**
 	 * Link datapackage address with a concept
 	 */
-	private final Map<String, Concept> data = new HashMap<String, Concept>();
+	private final Map<String, Chunk> data = new HashMap<String, Chunk>();
 	/**
 	 * Link concept id with concept. It is used to get connected concepts for a certain concept
 	 */
-	private final Map<String, Concept> availableConcepts = new HashMap<String, Concept>();
+	private final Map<String, Chunk> availableConcepts = new HashMap<String, Chunk>();
 	
 	private DatapackageImpl() {
 		
@@ -38,15 +38,15 @@ public class DatapackageImpl implements Datapackage {
 		return new DatapackageImpl(data);
 	}
 	
-	public static Datapackage newDatapackage(Map<String, Concept> data) {
+	public static Datapackage newDatapackage(Map<String, Chunk> data) {
 		Datapackage dp = new DatapackageImpl();
 		dp.setContent(data);
 		return dp;
 	}
 
 	@Override
-	public Concept get(String address) {
-		Concept result = ConceptImpl.nullConcept();
+	public Chunk get(String address) {
+		Chunk result = ChunkImpl.nullChunk();
 		
 		if (this.data.containsKey(address)==true) {
 			result = this.data.get(address);
@@ -56,32 +56,32 @@ public class DatapackageImpl implements Datapackage {
 	}
 
 	@Override
-	public Map<String, Concept> getViewOfAllConcepts() {
+	public Map<String, Chunk> getViewOfAllConcepts() {
 		return Collections.unmodifiableMap(this.data);
 	}
 
 	@Override
 	public void setContent(String address, String content) {
-		this.data.put(address, ConceptImpl.newConcept(address).newValue(address, content).build());
+		this.data.put(address, ChunkImpl.newChunk(address).newValue(address, content).build());
 		this.availableConcepts.put(data.get(address).getId(), data.get(address));
 	}
 
 	@Override
-	public void setContent(Map<String, Concept> content) {
+	public void setContent(Map<String, Chunk> content) {
 		this.data.putAll(content);
 		this.setIdsForContent(content);
 	}
 	
 	@Override
-	public void setContent(Concept concept) {
+	public void setContent(Chunk concept) {
 		this.data.put(concept.getName(), concept);
 		this.availableConcepts.put(concept.getId(), concept);
 		
 	}
 	
 	@Override
-	public Concept getConceptByID(String id) {
-		Concept result = ConceptImpl.nullConcept();
+	public Chunk getChunkByID(String id) {
+		Chunk result = ChunkImpl.nullChunk();
 		
 		if (this.availableConcepts.containsKey(id)==true) {
 			result = this.availableConcepts.get(id);
@@ -91,12 +91,12 @@ public class DatapackageImpl implements Datapackage {
 	}
 
 	@Override
-	public void setConceptByID(Concept concept) {
+	public void setConceptByID(Chunk concept) {
 		this.availableConcepts.put(concept.getId(), concept);
 	}
 
 	@Override
-	public Map<String, Concept> getViewOfAllConceptsByID() {
+	public Map<String, Chunk> getViewOfAllConceptsByID() {
 		return Collections.unmodifiableMap(this.availableConcepts);
 	}
 
@@ -113,9 +113,9 @@ public class DatapackageImpl implements Datapackage {
 		this.availableConcepts.clear();
 	}
 
-	private void setIdsForContent(Map<String, Concept> content) {
+	private void setIdsForContent(Map<String, Chunk> content) {
 		//Put all added concepts in the ID-Map but with Ids as keys and not addresses
-		content.values().forEach((Concept concept)->this.availableConcepts.put(concept.getId(), concept));
+		content.values().forEach((Chunk concept)->this.availableConcepts.put(concept.getId(), concept));
 	}
 
 	@Override
@@ -124,7 +124,7 @@ public class DatapackageImpl implements Datapackage {
 		builder.append("data=");
 		builder.append(this.data);
 		builder.append(", concepts=");
-		this.availableConcepts.values().forEach((Concept concept)->builder.append(concept.getName()+ ", "));
+		this.availableConcepts.values().forEach((Chunk concept)->builder.append(concept.getName()+ ", "));
 		return builder.toString();
 	}
 

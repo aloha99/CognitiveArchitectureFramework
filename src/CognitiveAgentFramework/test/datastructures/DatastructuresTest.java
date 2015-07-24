@@ -5,7 +5,7 @@ import logger.MyLogger;
 import org.junit.Test;
 import org.slf4j.Logger;
 
-import datastructures.ConceptImpl.ConceptBuilder;
+import datastructures.ChunkImpl.ChunkBuilder;
 
 public class DatastructuresTest {
 	
@@ -41,23 +41,25 @@ public class DatastructuresTest {
 			
 			//Create fake perception with concepts
 			//Create perception
-			ConceptBuilder perceptionBuilder = ConceptImpl.newConcept("PERCEPTION");
+			ChunkBuilder perceptionBuilder = ChunkImpl.newChunk("PERCEPTION");
 			for (int i=0;i<5;i++) {
-				Concept percept = ConceptImpl.newConcept("Schnitzel" + i).
+				Chunk percept = ChunkImpl.newChunk("Schnitzel" + i).
 						newValue(BODYTYPE, "bodytypeSchnitzel").
 						newValue(X, String.valueOf(i)).
 						newValue(Y, String.valueOf(i+1)).
 						newValue(OBJECTID, "Schnitzel" + i).
 						newValue(OBJECTNAME, "Schnitzel").
 						build();
+				log.debug("concept={}", percept);
 				
-				perceptionBuilder.addSubconcept(percept, perceptionPackage);
+				perceptionBuilder.addSubChunk(percept, perceptionPackage);
 			}
 			
-			Concept perception = perceptionBuilder.build();
+			Chunk perception = perceptionBuilder.build();
 			//Map<String, Concept> perceptionMap = new HashMap<String, Concept>();
 			//perceptionMap.put(perception.getName(), perception);
 			perceptionPackage.setContent(perception);
+			log.debug("Perception={}", perception);
 			
 			//Set input
 			//module.setInputData(DatapackageImpl.newDatapackage(perceptionPackage));
@@ -66,11 +68,11 @@ public class DatastructuresTest {
 			//module.runModule();
 			
 			//Get output Schnitzel5 X and Y position
-			Concept actualPerception = perceptionPackage.get(perception.getName());
+			Chunk actualPerception = perceptionPackage.get(perception.getName());
 			
-			int actualx = Integer.valueOf(actualPerception.getSubConcept("Schnitzel4", perceptionPackage).getValue(X));
-			int actualy = Integer.valueOf(actualPerception.getSubConcept("Schnitzel4", perceptionPackage).getValue(Y));
-			String actualobjectid  = actualPerception.getSubConcept("Schnitzel4", perceptionPackage).getValue(OBJECTID);
+			int actualx = Integer.valueOf(actualPerception.getSubChunk("Schnitzel4", perceptionPackage).getValue(X));
+			int actualy = Integer.valueOf(actualPerception.getSubChunk("Schnitzel4", perceptionPackage).getValue(Y));
+			String actualobjectid  = actualPerception.getSubChunk("Schnitzel4", perceptionPackage).getValue(OBJECTID);
 			
 			//Expected values
 			int expectedX = 4;

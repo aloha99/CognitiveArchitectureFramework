@@ -9,7 +9,7 @@ import agent1.modules.DecisionTrackModule;
 import agent1.modules.DriveTrackModule;
 import agent1.modules.EvaluationTrackModule;
 import agent1.modules.PerceptionTrackModule;
-import datastructures.ConceptImpl;
+import datastructures.ChunkImpl;
 import datastructures.Datapackage;
 import datastructures.DatapackageImpl;
 import framework.AgentMain;

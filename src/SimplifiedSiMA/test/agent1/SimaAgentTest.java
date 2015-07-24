@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 
 import agent1.TestAgentImpl;
-import datastructures.ConceptImpl;
+import datastructures.ChunkImpl;
 import datastructures.Datapackage;
 import datastructures.DatapackageImpl;
 import framework.AgentMain;
@@ -33,12 +33,12 @@ public class SimaAgentTest {
 			
 			//Map<String, ConceptImpl> driveMap = new HashMap<String, ConceptImpl>();
 			Datapackage driveMap = DatapackageImpl.newDatapackage();
-			driveMap.setContent(ConceptImpl.newConcept(address).newDefaultValue(String.valueOf(driveInput)).build());
+			driveMap.setContent(ChunkImpl.newChunk(address).newDefaultValue(String.valueOf(driveInput)).build());
 			//driveMap.put(address, ConceptImpl.newConcept(address).newDefaultValue(String.valueOf(driveInput)).build());
 			
 			//Map<String, ConceptImpl> perceptionMap = new HashMap<String, ConceptImpl>();
 			Datapackage perceptionMap = DatapackageImpl.newDatapackage();
-			perceptionMap.setContent(ConceptImpl.newConcept(address).newDefaultValue(String.valueOf(perceptionInput)).build());
+			perceptionMap.setContent(ChunkImpl.newChunk(address).newDefaultValue(String.valueOf(perceptionInput)).build());
 			
 			simaAgent.init();
 			

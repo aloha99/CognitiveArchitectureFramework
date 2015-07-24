@@ -1,7 +1,7 @@
 package agentminisima.modules;
 
-import datastructures.Concept;
-import datastructures.ConceptImpl;
+import datastructures.Chunk;
+import datastructures.ChunkImpl;
 import agentminisima.Names;
 import framework.ModuleImpl;
 
@@ -11,13 +11,13 @@ public class MotivationTrackModule extends ModuleImpl {
 	protected void executeModuleFunction() {
 		log.debug("Start motivation track");
 		//Get drives
-		Concept drive1 = this.getInputData().get(Names.DRIVE1NAME);
+		Chunk drive1 = this.getInputData().get(Names.DRIVE1NAME);
 		
 		//Create goals
-		Concept drivewish1 = ConceptImpl.newConcept(drive1, Names.DRIVEWISH1).build();
+		Chunk drivewish1 = ChunkImpl.newChunk(drive1, Names.DRIVEWISH1).build();
 		
 		//Create general drive wish structure
-		Concept drivewishes = ConceptImpl.newConcept(Names.DRIVEWISHESADDRESS).addSubconcept(drivewish1, this.getOutputData()).build();
+		Chunk drivewishes = ChunkImpl.newChunk(Names.DRIVEWISHESADDRESS).addSubChunk(drivewish1, this.getOutputData()).build();
 		
 		//Get emotions
 		//TODO: Implement emotions

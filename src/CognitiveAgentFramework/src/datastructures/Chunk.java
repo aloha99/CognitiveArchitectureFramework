@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public interface Concept {
+public interface Chunk {
 	//Metadata
 	
 	/**
@@ -85,22 +85,22 @@ public interface Concept {
 	public void setDefaultValue(String defaultValue);
 	
 	//Sub concepts
-	public List<Concept> getSubConcepts(Datapackage container);
-	public Concept getSubConcept(String name, Datapackage container);
-	public void addSubConcept(Concept concept, Datapackage container);
+	public List<Chunk> getSubChunks(Datapackage container);
+	public Chunk getSubChunk(String name, Datapackage container);
+	public void addSubChunk(Chunk concept, Datapackage container);
 	
 	//Super concepts
-	public void setSuperConcept(Concept superConcept, Datapackage container);
-	public Concept getSuperConcept(Datapackage container);
-	public boolean superConceptExist();
+	public void setSuperChunk(Chunk superConcept, Datapackage container);
+	public Chunk getSuperChunk(Datapackage container);
+	public boolean superChunkExist();
 	
 	//Associated concepts
 	public Map<String, ArrayList<String>> getAssociatedConceptsMap();
-	public Concept getAssociatedConcept(String predicate, Datapackage container);
-	public List<Concept> getAssociatedConcepts(String predicate, Datapackage container);
-	public void setAssociatedConcept(String predicate, Concept concept, Datapackage container);
-	public void setAssociatedConcept(String predicate, Concept concept, double weight, Datapackage container);
-	public void addAssociatedConcept(String predicate, Concept concept, Datapackage container) throws Exception;
-	public void addAssociatedConcept(String predicate, Concept concept, double weight, Datapackage container) throws Exception;
+	public Chunk getAssociatedChunk(String predicate, Datapackage container);
+	public List<Chunk> getAssociatedChunks(String predicate, Datapackage container);
+	public void setAssociatedChunk(String predicate, Chunk concept, Datapackage container);
+	public void setAssociatedChunk(String predicate, Chunk concept, double weight, Datapackage container);
+	public void addAssociatedChunk(String predicate, Chunk concept, Datapackage container) throws Exception;
+	public void addAssociatedChunk(String predicate, Chunk concept, double weight, Datapackage container) throws Exception;
 	
 }

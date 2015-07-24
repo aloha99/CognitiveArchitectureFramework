@@ -13,11 +13,11 @@ import modules.TesterModule;
 import org.junit.Test;
 import org.slf4j.Logger;
 
-import datastructures.Concept;
-import datastructures.ConceptImpl;
+import datastructures.Chunk;
+import datastructures.ChunkImpl;
 import datastructures.Datapackage;
 import datastructures.DatapackageImpl;
-import datastructures.ConceptImpl.ConceptBuilder;
+import datastructures.ChunkImpl.ChunkBuilder;
 
 public class ModuleTest {
 	
@@ -77,9 +77,9 @@ public class ModuleTest {
 			
 			//Create fake perception with concepts
 			//Create perception
-			ConceptBuilder perceptionBuilder = ConceptImpl.newConcept("PERCEPTION");
+			ChunkBuilder perceptionBuilder = ChunkImpl.newChunk("PERCEPTION");
 			for (int i=0;i<5;i++) {
-				Concept percept = ConceptImpl.newConcept("id" + i).
+				Chunk percept = ChunkImpl.newChunk("id" + i).
 						newValue(BODYTYPE, "bodytypeSchnitzel").
 						newValue(X, String.valueOf(i)).
 						newValue(Y, String.valueOf(i+1)).
@@ -87,10 +87,10 @@ public class ModuleTest {
 						newValue(OBJECTNAME, "Schnitzel").
 						build();
 				
-				perceptionBuilder.addSubconcept(percept, perceptionPackage);
+				perceptionBuilder.addSubChunk(percept, perceptionPackage);
 			}
 			
-			Concept perception = perceptionBuilder.build();
+			Chunk perception = perceptionBuilder.build();
 			//Map<String, Concept> perceptionMap = new HashMap<String, Concept>();
 			//perceptionMap.put(perception.getName(), perception);
 			perceptionPackage.setContent(perception);
@@ -102,11 +102,11 @@ public class ModuleTest {
 			module.runModule();
 			
 			//Get output Schnitzel5 X and Y position
-			Concept actualPerception = module.getOutputData().get("PERCEPTION");
+			Chunk actualPerception = module.getOutputData().get("PERCEPTION");
 			
-			int actualx = Integer.valueOf(actualPerception.getSubConcept("id46", module.getOutputData()).getValue(X));
-			int actualy = Integer.valueOf(actualPerception.getSubConcept("id46", module.getOutputData()).getValue(Y));
-			String actualobjectid  = actualPerception.getSubConcept("id46", module.getOutputData()).getValue(OBJECTID);
+			int actualx = Integer.valueOf(actualPerception.getSubChunk("id46", module.getOutputData()).getValue(X));
+			int actualy = Integer.valueOf(actualPerception.getSubChunk("id46", module.getOutputData()).getValue(Y));
+			String actualobjectid  = actualPerception.getSubChunk("id46", module.getOutputData()).getValue(OBJECTID);
 			
 			//Expected values
 			int expectedX = 4;

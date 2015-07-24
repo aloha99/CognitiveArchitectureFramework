@@ -14,7 +14,7 @@ import agentminisima.modules.OptionsTrackModule;
 import agentminisima.modules.PerceptionPreparationTrackModule;
 import agentminisima.modules.PerceptionTrackModule;
 import agentminisima.modules.SituationLearningTrackModule;
-import datastructures.ConceptImpl;
+import datastructures.ChunkImpl;
 import datastructures.Datapackage;
 import datastructures.DatapackageImpl;
 import framework.AgentMain;

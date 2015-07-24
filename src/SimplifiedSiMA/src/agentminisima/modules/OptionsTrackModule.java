@@ -1,7 +1,7 @@
 package agentminisima.modules;
 
-import datastructures.Concept;
-import datastructures.ConceptImpl;
+import datastructures.Chunk;
+import datastructures.ChunkImpl;
 import agentminisima.Actions;
 import agentminisima.Names;
 import framework.ModuleImpl;
@@ -12,15 +12,15 @@ public class OptionsTrackModule extends ModuleImpl {
 	protected void executeModuleFunction() {
 		//=== Get inputs ===//
 		//Get drive wishes
-		Concept driveWishes = this.getInputData().get(Names.DRIVEWISHESADDRESS);
+		Chunk driveWishes = this.getInputData().get(Names.DRIVEWISHESADDRESS);
 		//Get activated seqeunces
-		Concept episodes = this.getInputData().get(Names.EPISODESADDRESS);
+		Chunk episodes = this.getInputData().get(Names.EPISODESADDRESS);
 		
 		//Get emotions
 		//TODO: Implement emotions
 		
 		//Get current state
-		Concept currentState = this.getInputData().get(Names.CURRENTSTATEADDRESS);
+		Chunk currentState = this.getInputData().get(Names.CURRENTSTATEADDRESS);
 		
 		
 		//=== Generate options ===//
@@ -28,8 +28,8 @@ public class OptionsTrackModule extends ModuleImpl {
 		//FIXME: Just generate random action
 		String[] actions = Actions.getAllActions();
 		String action = actions[(int) (actions.length*Math.random())];
-		Concept option1 = ConceptImpl.newConcept("RANDOMOPTION").
-				addSubconcept(ConceptImpl.newConcept(Names.ACTIONADDRESS).newDefaultValue(action).build(), this.getOutputData()).
+		Chunk option1 = ChunkImpl.newChunk("RANDOMOPTION").
+				addSubChunk(ChunkImpl.newChunk(Names.ACTIONADDRESS).newDefaultValue(action).build(), this.getOutputData()).
 				build();
 		
 		
@@ -38,7 +38,7 @@ public class OptionsTrackModule extends ModuleImpl {
 		
 		//=== Select option ===//
 		//newConcept only copies the strings but not any sub concepts
-		Concept selectedOption = ConceptImpl.newConcept(option1, Names.SELECTEDOPTIONADDRESS).build();
+		Chunk selectedOption = ChunkImpl.newChunk(option1, Names.SELECTEDOPTIONADDRESS).build();
 		
 		
 		//=== Set output ===//
